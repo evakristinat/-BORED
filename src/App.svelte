@@ -38,14 +38,37 @@
     return Math.floor(Math.random() * 3) + 2;
   };
 
-  //getToDo hakee aktiviteetin API:sta
-  const getToDo = async (option) => {
-    const response = await fetch(
-      `http://www.boredapi.com/api/activity?${option}`
+//getToDo hakee aktiviteetin API:sta
+const getToDo = async (option) => {
+    //console.log(option)
+    // Random-sivu käyttää optiona "undefined"
+    if (option == undefined) {
+      // Jos satunnainen luku on kaksi tai alle,
+      // haetaan omasta tietokannasta activityt
+      if (getRandomNumber() <= 2) {
+        //console.log("Kaksi tai alle")
+        const response = await fetch(
+        `https://bored-svelte-default-rtdb.europe-west1.firebasedatabase.app/.json`
     );
     if (!response.ok) {
       throw new Error('Fetch unsuccessful');
     }
+    const res = await response.json();
+    // Otetaan satunnainen alkio responsesta
+    const randomElement = res[Math.floor(Math.random() * res.length)];
+    console.log(randomElement)
+    return await randomElement;
+      }
+    }
+    // Jos satunnainen luku on yli kaksi,
+    // haetaan activity API:sta
+    const response = await fetch(
+      `https://www.boredapi.com/api/activity?${option}`
+    );
+    if (!response.ok) {
+      throw new Error('Fetch unsuccessful');
+    }
+    //console.log(response.json())
     return await response.json();
   };
 
