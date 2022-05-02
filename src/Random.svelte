@@ -41,12 +41,15 @@
         <p class="error">{error.message}</p>
       {/await}
       <div class="box">
-      <Button on:click={() => dispatch('ok', selected)} raised color
-        >OK</Button
+        <!-- tähän tulee change preferences ja toiminnallisuus app.svelteen -->
+      <Button on:click={() => dispatch('', selected)} raised color
+        >Change preferences</Button
       >
       <Button on:click={() => dispatch('new')} raised color
-        >Maybe something else</Button
+        >Not happy</Button
       >
+      <!-- tähän tulee formiin siirtyminen ja logiikka sille löytyy app.sveltestä-->
+      <Button on:click={()=> dispatch('')} raised color>Give us a suggestion</Button>
     </div>
     </div>
   </section>
