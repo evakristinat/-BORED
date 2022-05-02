@@ -41,12 +41,11 @@
 //getToDo hakee aktiviteetin API:sta
 const getToDo = async (option) => {
     //console.log(option)
-    // Random-sivu käyttää optiona "undefined"
-    if (option == undefined) {
-      // Jos satunnainen luku on kaksi tai alle,
-      // haetaan omasta tietokannasta activityt
-      if (getRandomNumber() <= 2) {
-        //console.log("Kaksi tai alle")
+    // Jos option-parametrina on "undefined"
+    // ja satunnainen luku on kaksi tai alle,
+    // haetaan omasta tietokannasta activityt
+    if (option == undefined && getRandomNumber() <= 2) {
+        //console.log("Haetaan omaa dataa")
         const response = await fetch(
         `https://bored-svelte-default-rtdb.europe-west1.firebasedatabase.app/.json`
     );
@@ -54,11 +53,13 @@ const getToDo = async (option) => {
       throw new Error('Fetch unsuccessful');
     }
     const res = await response.json();
-    // Otetaan satunnainen alkio responsesta
-    const randomElement = res[Math.floor(Math.random() * res.length)];
-    console.log(randomElement)
+    // Muunnetaan palautunut objekti arrayksi
+    const array = Object.values(res);
+    //console.log(array);
+    // Otetaan satunnainen alkio arraysta
+    const randomElement = array[Math.floor(Math.random() * array.length)];
+    //console.log(randomElement)
     return await randomElement;
-      }
     }
     // Jos satunnainen luku on yli kaksi,
     // haetaan activity API:sta
