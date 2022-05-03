@@ -81,7 +81,7 @@
     list-style: none;
   }
   li:hover {
-    background-color: grey;
+    font-size: 1.2em;
   }
 
   .selected {

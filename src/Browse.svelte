@@ -1,28 +1,29 @@
 <script>
-  import PageHeader from './PageHeader.svelte';
-  import Categories from './Categories.svelte';
-  import customActivities from './activities';
+  import PageHeader from './PageHeader.svelte'
+  import Categories from './Categories.svelte'
+  import customActivities from './activities'
 
-  import { slide, fade } from 'svelte/transition';
-  import { Button } from 'svelte-mui';
-  import { createEventDispatcher } from 'svelte';
+  import { slide, fade } from 'svelte/transition'
+  import { Button } from 'svelte-mui'
+  import { createEventDispatcher } from 'svelte'
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 </script>
 
 <div class="container" transition:slide={{ duration: 900 }}>
   <PageHeader pageName="Browse">
     <p slot="info">Browse suggestions based on wanted category</p>
   </PageHeader>
-
-  <Categories />
   <div class="content">
+    <div>
+      <Categories />
+    </div>
     <div class="grid">
       <!--näytetään kaikki storen aktiviteetit. Ei käytetty id:tä,
          koska arvot on varmistettu uniikeiksi jo aikaisemmin,
         eikä poistoja tehdä -->
       {#each $customActivities as activity}
-        <div class="activity" in:fade={{duration: 500}}>
+        <div class="activity" in:fade={{ duration: 500 }}>
           <p>
             {activity}
           </p>
@@ -52,6 +53,9 @@
     width: 90%;
     max-width: 800px;
     margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-items: stretch;
   }
   .grid {
     display: grid;
@@ -59,7 +63,7 @@
     height: 300px;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 50% 50%;
-    margin-top: 70px;
+    margin-top: 50px;
     gap: 1em;
     align-content: center;
   }

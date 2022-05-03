@@ -93,9 +93,11 @@
 
 <style>
   .flex {
+    margin: auto;
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
+    max-width: 800px;
   }
   .container {
     background-color: rgb(234, 234, 245);
