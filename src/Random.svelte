@@ -1,56 +1,79 @@
 <script>
-  import PageHeader from './PageHeader.svelte';
-  import { Button } from 'svelte-mui';
-  import { createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
-  import { Firework } from 'svelte-loading-spinners';
+  import PageHeader from './PageHeader.svelte'
+  import { Button } from 'svelte-mui'
+  import { createEventDispatcher } from 'svelte'
+  import { slide } from 'svelte/transition'
+  import { Firework } from 'svelte-loading-spinners'
 
-  const dispatch = createEventDispatcher();
-  export let promise;
-  export let header;
-  let selectedToDo;
+  const dispatch = createEventDispatcher()
+  export let promise
+  export let header
+  let selectedToDo
 
   /*selected päivitetään aina kun selectedToDo muuttuu.
     selectedToDo sisältää promisesta saatavan vastauksen 
     esittävän elementin. Se käsitellään app-komponentissa*/
-  $: selected = selectedToDo;
+  $: selected = selectedToDo
 </script>
 
 <div class="container" transition:slide={{ duration: 900 }}>
   <section>
     <slot name="header">
       <PageHeader pageName={header}>
-        <p slot="info">Go through suggestions until you find something to do.</p>
+        <p slot="info">
+          Go through suggestions until you find something to do.
+        </p>
       </PageHeader>
     </slot>
     <div class="suggestion-box">
       <!--Await-blocks tehty käyttäen pohjana
-    https://svelte.dev/tutorial/await-blocks-->
+       https://svelte.dev/tutorial/await-blocks-->
       <p>You could...</p>
       <!--odotetaan lupausta, joka saadaan app-komponentilta
           odottaessamme näämme spinnerin-->
       {#await promise}
         <div class="loading" transiton:fade>
-          <Firework color="grey"/>
+          <Firework color="grey" />
         </div>
       {:then todo}
-        <span>
+        <span class="text-box">
           <h4 bind:this={selectedToDo}>{todo.activity}</h4>
         </span>
       {:catch error}
         <p class="error">{error.message}</p>
       {/await}
-      <div class="box">
-        <!-- tähän tulee change preferences ja toiminnallisuus app.svelteen -->
-      <Button on:click={() => dispatch('', selected)} raised color
-        >Change preferences</Button
-      >
-      <Button on:click={() => dispatch('new')} raised color
-        >Not happy</Button
-      >
-      <!-- tähän tulee formiin siirtyminen ja logiikka sille löytyy app.sveltestä-->
-      <Button on:click={()=> dispatch('')} raised color>Give us a suggestion</Button>
     </div>
+
+    <div class="box">
+      <div class="button-box">
+        <Button
+          on:click={() => dispatch('new')}
+          shaped
+          raised
+          color="rgb(159, 180, 253)"
+        >
+          Not happy?
+        </Button>
+      </div>
+
+      <div class="button-box">
+        <!-- tähän tulee change preferences ja toiminnallisuus app.svelteen -->
+        <Button
+          on:click={() => dispatch('change', selected)}
+          shaped
+          raised
+          color="rgb(159, 180, 253)">Change preferences?</Button
+        >
+      </div>
+      <div class="button-box">
+        <!-- tähän tulee formiin siirtyminen ja logiikka sille löytyy app.sveltestä-->
+        <Button
+          on:click={() => dispatch('form')}
+          shaped
+          raised
+          color="rgb(159, 180, 253)">Give us a suggestion!</Button
+        >
+      </div>
     </div>
   </section>
 </div>
@@ -60,65 +83,69 @@
     height: 100%;
     overflow: hidden;
     contain: content;
-    background-color: rgb(194, 193, 230);
+    background-color: rgb(234, 234, 245);
   }
-  section{
+  section {
     height: 100%;
   }
   .suggestion-box {
-    width: 80%;
+    color: whitesmoke;
+    width: fit-content;
+    min-width: 500px;
     max-width: 800px;
     margin: auto;
-    padding-top:2vh;
-    background-color: white;
-    padding-bottom: 5%; 
-    height: 20vh; 
+    padding-top: 2vh;
+    background-color: rgb(54, 15, 197);
+    border-radius: 30px;
     box-shadow: -2px 5px 15px -7px rgba(83, 83, 83, 0.32);
   }
 
-  h4,
-  .loading, .error {
-    padding-top: 2vh;
+  .text-box,
+  .loading,
+  .error {
     padding-bottom: 3vh;
-    height: 4em;
+    max-height: 4em;
     margin: 0;
     text-align: center;
   }
 
-  span{
+  .text-box {
     display: inline-block;
-    vertical-align: middle;
-    line-height: 4em;
   }
 
   .loading {
-    width: 1vh;
-    margin-left: 47%;
+    width: 50px;
+    margin-left: 50%;
+    transform: translateX(-50%);
   }
-  .box{
+  .box {
     display: flex;
-    justify-content: space-evenly;
     margin: auto;
-    width: 42vw;
-    max-width: 330px;
+    margin-top: 3vh ;
+    height: 5vh;
+    width: 800px;
+    justify-content: space-evenly;
   }
 
-  @media(max-width:600px){
+  .button-box {
+    margin: 2vw;
+    max-width: 60%;
+    
+  }
+
+  @media (max-width: 600px) {
     .suggestion-box {
-    margin-top: 5%;
-    padding-bottom: 5%;
-    height: 30vh;
-  }
+      margin-top: 5%;
+      padding: 5%;
+      width: fit-content;
+      min-width: 200px;
+    }
 
-  .box{
-    bottom: -80px;
-    width: 90%;
-  }
-
-  .loading {
-    width: 1vh;
-    margin-left: 47%;
-  }
+    .box {
+      bottom: -80px;
+      max-width: 90%;
+      flex-wrap: wrap;
+    }
 
   }
 </style>

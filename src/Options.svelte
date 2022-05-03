@@ -3,6 +3,7 @@
   import { Button } from 'svelte-mui';
   import { createEventDispatcher } from 'svelte';
   import { slide } from 'svelte/transition';
+  import Categories from './Categories.svelte'
 
   //dispatch vastaa tapahtumien viennistä komponenttien välillä.
   const dispatch = createEventDispatcher();
@@ -60,6 +61,10 @@
       </div>
     </form>
   </section>
+  OR SELECT BASED ON CATEGORY
+  <Categories></Categories>
+  <Button on:click={()=> dispatch('sendtype')}>Let's go</Button>
+
 </div>
 
 <style>

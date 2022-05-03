@@ -1,18 +1,17 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
-  import { Button } from 'svelte-mui';
+  import { createEventDispatcher } from 'svelte'
+  import { slide } from 'svelte/transition'
+  import { Button } from 'svelte-mui'
 
-  const dispatch = createEventDispatcher();
-
-
+  const dispatch = createEventDispatcher()
 </script>
 
 <div class="container" transition:slide={{ duration: 900 }}>
   <div class="welcome">
     <h1>Welcome</h1>
     <h2>
-      During the pandemic figuring out what to do isn't always easy but by answering a few questions we can find you just the right thing
+      During the pandemic figuring out what to do isn't always easy but by
+      answering a few questions we can find you just the right thing
     </h2>
 
     <div class="cta">
@@ -22,7 +21,7 @@
     </div>
   </div>
 
-  <div class="content">
+  <!-- <div class="content">
     <h3>Features</h3>
     <p>If you're up for anything try random or browse!</p>
 
@@ -38,8 +37,11 @@
         <h2 id="randomHeader">RANDOM</h2>
         <p>Get random suggestions on what to do until you find what you want</p>
       </div>
+
+      
     </div>
-  </div>
+  </div> -->
+  
 </div>
 
 <style>
@@ -50,7 +52,7 @@
     contain: content;
   }
 
-  .content{
+  .content {
     bottom: 0px;
     background-color: rgba(46, 47, 51, 0.89);
     height: 50%;
@@ -60,7 +62,7 @@
 
   .welcome {
     height: 30vh;
-    padding: 20px 0% 50px ;
+    padding: 20px 0% 50px;
     box-shadow: -2px 5px 15px -7px rgba(83, 83, 83, 0.32);
   }
 
@@ -75,7 +77,8 @@
     font-weight: 400;
     max-width: 800px;
     margin: auto;
-  } h3{
+  }
+  h3 {
     width: 90%;
     padding-top: 4vh;
     padding-bottom: 1vh;
@@ -84,7 +87,7 @@
     font-weight: 500;
     color: white;
   }
-  .content > p{
+  .content > p {
     font-size: 1em;
     color: rgba(255, 255, 255, 0.904);
     padding-top: 1vh;
@@ -155,8 +158,6 @@
     box-shadow: -2px 5px 15px -1px rgba(83, 83, 83, 0.32);
   }
 
-
-
   @media (max-width: 400px) {
     .container {
       padding-top: 5vh;
@@ -187,7 +188,7 @@
       height: 30%;
       margin-top: 4vh;
       padding: 0;
-      margin-left:0;
+      margin-left: 0;
       margin-right: 0;
     }
     #browse > p,

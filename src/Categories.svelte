@@ -3,7 +3,7 @@
   import { getContext } from 'svelte';
  
 
-  //getContextin avulla setsetsetActivityType päivittyy suoraan app-komponenttiin.
+  //getContextin avulla setActivityType päivittyy suoraan app-komponenttiin.
   const setActivityType = getContext('setActivityType');
 
   const active =
@@ -67,7 +67,6 @@
     width: 91%;
     max-width: 813px;
     margin: auto;
-    background-color: rgba(234, 234, 245, 0.87);
     overflow: hidden;
     contain: content;
   }
