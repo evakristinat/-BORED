@@ -1,18 +1,18 @@
 <script>
-  export let header = 'Header';
-  let clicked;
-  let class1;
-  let class2;
-  let class3;
+  export let header = 'Header'
+  let clicked
+  let class1
+  let class2
+  let class3
 
   /*getClicked asettaa asettaa clicked muuttujaan klikatun elementin id:n.
     ja muuttaa sitä vastaavan elementin luokan valituksi*/
   const getClicked = (e) => {
-    clicked = e.target.id;
-    class1 = clicked == 1 ? 'selected' : 'li';
-    class2 = clicked == 2 ? 'selected' : 'li';
-    class3 = clicked == 3 ? 'selected' : 'li';
-  };
+    clicked = e.target.id
+    class1 = clicked == 1 ? 'selected' : 'li'
+    class2 = clicked == 2 ? 'selected' : 'li'
+    class3 = clicked == 3 ? 'selected' : 'li'
+  }
 </script>
 
 <div class="container">
@@ -36,6 +36,7 @@
 </div>
 
 <style>
+
   .container {
     background-color: rgb(234, 234, 245);
   }

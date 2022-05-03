@@ -1,64 +1,51 @@
 <script>
-  import { Button } from 'svelte-mui';
-  import { getContext } from 'svelte';
- 
+  import { getContext } from 'svelte'
 
   //getContextin avulla setActivityType päivittyy suoraan app-komponenttiin.
-  const setActivityType = getContext('setActivityType');
+  const setActivityType = getContext('setActivityType')
 
-  const active =
-    '&type=charity&type=music&type=diy&type=recreational';
-  const chill = 'type=cooking&type=relaxation&type=busywork&type=educational';
-  const social = 'type=social';
+  const active = '&type=charity&type=music&type=diy&type=recreational'
+  const chill = 'type=cooking&type=relaxation&type=busywork&type=educational'
+  const social = 'type=social'
 </script>
 
 <div class="container">
-
   <div class="buttongroup">
-    <div>
-      <Button
-        id="chill"
-        on:click={() => {
-          setActivityType(chill);
-        }}
-        raised
-        fullWidth
-        color="rgb(250, 252, 246)"
-      >
-        <img src="../glass.png" alt="glass" width="50" />
-        <label for="chill">CHILL </label>
-      </Button>
-    </div>
+    <button
+      class="icon-button"
+      id="chill"
+      on:click={() => {
+        setActivityType(chill)
+      }}
+      raised
+      fullWidth
+      color="rgb(250, 252, 246)"
+    >
+      CHILL
+    </button>
 
-    <div>
-      <Button
-        id="active"
-        on:click={() => {
-          setActivityType(active);
-        }}
-        raised
-        fullWidth
-        color="rgb(250, 252, 246)"
-      >
-        <img src="../basketball.png" alt="basketball" width="40" />
-        <label for="active"> ACTIVE </label>
-      </Button>
-    </div>
+    <button
+      class="icon-button"
+      id="active"
+      on:click={() => {
+        setActivityType(active)
+      }}
+      raised
+      fullWidth
+      color="rgb(250, 252, 246)"
+    >
+      ACTIVE
+    </button>
 
-    <div>
-      <Button
-        id="social"
-        on:click={() => {
-          setActivityType(social);
-        }}
-        raised
-        fullWidth
-        color="rgb(250, 252, 246)"
-      >
-        <img src="../speakers.png" alt="speaker" width="40" />
-        <label for="social"> SOCIAL </label>
-      </Button>
-    </div>
+    <button
+      class="icon-button"
+      id="social"
+      on:click={() => {
+        setActivityType(social)
+      }}
+    >
+      SOCIAL
+    </button>
   </div>
 </div>
 
@@ -67,59 +54,41 @@
     width: 91%;
     max-width: 813px;
     margin: auto;
-    overflow: hidden;
-    contain: content;
+    min-height: fit-content;
+    max-height: 400px;
   }
   .buttongroup {
     display: flex;
-    justify-content: space-between;
-    padding-top: 0px;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-top: 10px;
+    height: 100%;
     width: 100%;
-    height: 50px;
-    align-content: flex-end;
   }
 
-  .buttongroup > div {
-    width: 40%;
-    min-height: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1%;
-  }
-  img {
-    justify-self: left;
-    margin: 0px;
-    padding: 0px;
+  .icon-button {
+    border: none;
+    box-shadow: 1px 5px 10px 0 rgba(20, 50, 150, 0.141),
+      1px 5px 10px 0 rgba(23, 28, 158, 0.19);
+    border-radius: 30px;
+    padding: 1em;
+    margin: 1em;
+    text-align: center;
+    background-color: rgb(159, 180, 253);
+    cursor: pointer;
   }
 
-  label {
-    padding-right: 20px;
-    padding-left: 1%;
+  .icon-button:focus {
+    background-color: blue;
   }
 
   @media (max-width: 600px) {
-    label {
-      padding-right: 0px;
-    }
-
     .buttongroup {
-    display: flex;
-    justify-content:space-between;
-    padding-top: 0px;
-    width: 90%;
-    margin: auto;
-    height: 50px;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0px;
+      width: 100%;
+      margin: auto;
+    }
   }
-    .buttongroup > div {
-    width: 32.5%;
-    min-height: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0px;
-  }
- 
-  }
-
 </style>

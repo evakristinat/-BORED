@@ -180,7 +180,7 @@
       <Route path="options"
         ><Options
           rangelabel="How active are you feeling?"
-          buttonLabel="Would you like to do something alone or with people?"
+          buttonLabel="How many are there?"
           on:send={getOptions}
           on:sendtype={getTypes}
         >
@@ -226,6 +226,7 @@
           {promise}
           on:new={newIdea}
           on:ok={getSelected}
+          on:change={()=>navigate('options')}
         /></Route
       >
       <Route path="result"

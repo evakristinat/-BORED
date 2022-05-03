@@ -91,7 +91,7 @@
   }
 
   @media (max-width: 400px) {
-    .grid {
+    /* .grid {
       padding-top: 22%;
       width: 90%;
       max-width: 600px;
@@ -101,7 +101,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 15vh 15vh 15vh;
       gap: 0.5em;
-    }
+    } */
     .activity > p {
       font-size: 1em;
     }

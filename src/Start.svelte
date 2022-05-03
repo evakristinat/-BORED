@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <!-- <div class="content">
+  <div class="content">
     <h3>Features</h3>
     <p>If you're up for anything try random or browse!</p>
 
@@ -40,7 +40,7 @@
 
       
     </div>
-  </div> -->
+  </div>
   
 </div>
 
@@ -96,9 +96,13 @@
 
   #browse {
     background-color: rgba(177, 177, 177, 0.349);
+    border-radius: 20px;
+    contain: content;
   }
   #random {
     background-color: rgba(236, 232, 240, 0.363);
+    border-radius: 20px;
+    contain: content;
   }
 
   #browse > h2,
@@ -110,6 +114,7 @@
     padding: 7% 0% 6%;
     margin-top: 0px;
     cursor: pointer;
+  
   }
 
   #browse > p,

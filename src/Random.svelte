@@ -90,9 +90,9 @@
   }
   .suggestion-box {
     color: whitesmoke;
-    width: fit-content;
+    width: 70%;
     min-width: 500px;
-    max-width: 800px;
+    max-width: 600px;
     margin: auto;
     padding-top: 2vh;
     background-color: rgb(54, 15, 197);
@@ -137,7 +137,7 @@
     .suggestion-box {
       margin-top: 5%;
       padding: 5%;
-      width: fit-content;
+      width: 80%;
       min-width: 200px;
     }
 
