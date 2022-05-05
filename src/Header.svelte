@@ -29,9 +29,9 @@
       <li id="2" on:click={getClicked} class={class2}>
         <slot name="2" />
       </li>
-      <li id="3" on:click={getClicked} class={class3}>
+      <!-- <li id="3" on:click={getClicked} class={class3}>
         <slot name="3" />
-      </li>
+      </li> -->
       <li id="4" on:click={getClicked} class={class4}><slot name="4" /></li>
     </nav>
   </div>
@@ -54,9 +54,8 @@
   }
 
   header {
+    align-self: center;
     padding: 0;
-    padding-right: 1.2em;
-    font-size: 0.8em;
     text-align: left;
     min-width: 100px;
     max-width: 150px;
@@ -109,7 +108,6 @@
 
   @media (max-width: 400px) {
     header {
-      padding-top: 2em;
       font-size: 0.6em;
       width: 25%;
     }

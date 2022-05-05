@@ -54,6 +54,7 @@
     max-width: 800px;
     margin: auto;
     display: flex;
+    flex-direction: row-reverse;
     align-items: flex-start;
     justify-items: stretch;
   }

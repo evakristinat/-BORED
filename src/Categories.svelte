@@ -60,14 +60,17 @@
   .buttongroup {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content:stretch;
     padding-top: 10px;
     height: 100%;
     width: 100%;
+    min-width: 200px;
   }
 
   .icon-button {
     border: none;
+    width: 50%;
+    min-width: 100px;
     box-shadow: 1px 5px 10px 0 rgba(20, 50, 150, 0.141),
       1px 5px 10px 0 rgba(23, 28, 158, 0.19);
     border-radius: 30px;

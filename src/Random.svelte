@@ -93,6 +93,7 @@
     width: 70%;
     min-width: 500px;
     max-width: 600px;
+    min-height: 180px;
     margin: auto;
     padding-top: 2vh;
     background-color: rgb(54, 15, 197);

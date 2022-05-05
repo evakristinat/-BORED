@@ -1,7 +1,9 @@
 body, html {
   height: 100%;
+  width: 100%;
   margin: 0;
   font-family: var(--button-font-family, Roboto, Helvetica, sans-serif);
+  overflow: hidden;
 }
 a {
   text-transform: uppercase;
@@ -9,4 +11,10 @@ a {
   color: rgb(61, 60, 60);
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'GRAD' 200,
+  'opsz' 48;
+}
 

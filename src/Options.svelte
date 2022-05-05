@@ -18,7 +18,7 @@
   }
 </script>
 
-<div class="container" transition:slide={{ duration: 900 }}>
+<div class="container" transition:slide={{ duration: 500 }}>
   <PageHeader pageName="Options"
     ><p slot="info">
       Answer these questions to get customised suggestions on what to do or
@@ -95,9 +95,11 @@
   .flex {
     margin: auto;
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     align-items: flex-start;
     max-width: 800px;
+    width: 90%;
+    margin: auto;
   }
   .container {
     background-color: rgb(234, 234, 245);
@@ -120,7 +122,9 @@
   }
   .submit-button {
     background-color: blue;
+    color: whitesmoke;
     margin: auto;
+    margin-bottom: 2vh;
     border: none;
     padding: 20%;
     width: max-content;

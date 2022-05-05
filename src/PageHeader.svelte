@@ -24,6 +24,7 @@
     text-align: left;
     padding-bottom:3em;
     padding-top: 1em;
+    padding-left: 2vh;
     width: 90%;
     max-width: 800px;
     margin: auto;
