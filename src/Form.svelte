@@ -2,7 +2,30 @@
   import PageHeader from './PageHeader.svelte';
   import { slide } from 'svelte/transition';
 
+  // näihin asetetaan formista saadut tiedot
+  let name = '';
+  let type = 'chill';
+  let participants = '';
   let activity = 0.5;
+
+  // addActivity lisää aktiviteetin tietokantaan
+  const submitForm = () => {
+    const newActivity = {
+      accessibility: activity,
+      activity: name,
+      participants: participants,
+      type: type,
+    }
+    fetch(
+      'https://bored-svelte-default-rtdb.europe-west1.firebasedatabase.app/.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(newActivity),
+      }
+    )
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
+  };
 </script>
 
 <div class="container" transition:slide={{ duration: 900 }}>
@@ -15,19 +38,20 @@
   <div class="content">
     <!--Input kenttä johon kirjoitetaan ehdotettava aktiviteetti-->
     <div class="flex">
-      <form>
-        <label for="input1"
+      <form on:submit|preventDefault={submitForm}>
+        <label for="name"
           >Name of the suggestion<br /><input
             type="text"
-            id="input1"
+            id="name"
             class="input"
+            bind:value="{name}"
           /></label
         >
 
         <!--Select kenttä, jossa valitaan mihin kategoriaan ehdotettava aktiviteetti kuuluu-->
-        <label for="input2"
+        <label for="type"
           >What category does the suggestion fall in<br />
-          <select id="input2" name="input2" class="input">
+          <select id="type" name="type" class="input" bind:value="{type}">
             <option value="chill">Chill</option>
             <option value="active">Active</option>
             <option value="social">Social</option>
@@ -35,13 +59,13 @@
         </label>
 
         <!--Input valinta kuinka monelle ihmisille aktiviteetti on tarkoitettu. Minimi on 1 ja maksimi on 5-->
-        <label for="input3"
+        <label for="participants"
           >For how many people is the activity<br />
-          <input id="input3" type="number" class="input" min="1" max="5" />
+          <input id="participants" type="number" class="input" min="1" max="5" bind:value="{participants}" />
         </label>
 
         <!--Input kenttä ehdotuksen aktiivisuudelle-->
-        <label for="input4">
+        <label for="activity">
           How active to do the suggestion<br />
           <div class="activity">
             <input
@@ -99,18 +123,18 @@
     border-radius: 10px;
   }
 
-  #input1 {
+  #name {
     width: 150%;
     height: 50%;
     border-radius: 5px;
   }
 
-  #input2 {
+  #type {
     width: 20%;
     height: 50%;
   }
 
-  #input3 {
+  #participants {
     width: 15%;
   }
 
