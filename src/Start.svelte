@@ -132,9 +132,9 @@
     padding-bottom: 1vh;
     margin: auto;
     font-size: 1.3em;
-    font-weight: 500;
-    color: darkgrey;
+    font-weight: 600;
     text-align: left;
+    text-transform: uppercase;
   }
   .content > p {
     font-size: 1em;

@@ -1,6 +1,5 @@
 <script>
   import PageHeader from './PageHeader.svelte'
-  import { Button } from 'svelte-mui'
   import { createEventDispatcher } from 'svelte'
   import { fly } from 'svelte/transition'
   import { Firework } from 'svelte-loading-spinners'
@@ -16,7 +15,7 @@
   $: selected = selectedToDo
 </script>
 
-<div class="container" in:fly={{ duration: 500, x:100}}>
+<div class="container" in:fly={{ duration: 500, x: 100 }}>
   <section>
     <slot name="header">
       <PageHeader pageName={header}>
@@ -28,7 +27,7 @@
     <div class="suggestion-box">
       <!--Await-blocks tehty käyttäen pohjana
        https://svelte.dev/tutorial/await-blocks-->
-      <p>You could...</p>
+      <p class="intro">You could...</p>
       <!--odotetaan lupausta, joka saadaan app-komponentilta
           odottaessamme näämme spinnerin-->
       {#await promise}
@@ -46,32 +45,31 @@
 
     <div class="box">
       <div class="button-box">
-        <Button
+        <button
+          class="button"
           on:click={() => dispatch('new')}
           shaped
           raised
           color="rgb(159, 180, 253)"
         >
           Not happy?
-        </Button>
+        </button>
       </div>
 
       <div class="button-box">
         <!-- tähän tulee change preferences ja toiminnallisuus app.svelteen -->
-        <Button
+        <button
+          class="button"
           on:click={() => dispatch('change', selected)}
-          shaped
-          raised
-          color="rgb(159, 180, 253)">Change preferences?</Button
+          color="rgb(159, 180, 253)">Change preferences?</button
         >
       </div>
       <div class="button-box">
         <!-- tähän tulee formiin siirtyminen ja logiikka sille löytyy app.sveltestä-->
-        <Button
+        <button
+          class="button"
           on:click={() => dispatch('form')}
-          shaped
-          raised
-          color="rgb(159, 180, 253)">Give us a suggestion!</Button
+          color="rgb(159, 180, 253)">Give us a suggestion!</button
         >
       </div>
     </div>
@@ -113,6 +111,9 @@
   .text-box {
     display: inline-block;
   }
+  .intro{
+    color: rgba(240, 248, 255, 0.711);
+  }
 
   .loading {
     width: 50px;
@@ -122,16 +123,39 @@
   .box {
     display: flex;
     margin: auto;
-    margin-top: 3vh ;
+    margin-top: 3vh;
     height: 5vh;
     width: 800px;
     justify-content: space-evenly;
+    height: fit-content;
+    contain: content;
   }
 
   .button-box {
     margin: 2vw;
     max-width: 60%;
-    
+    height: 100%;
+  }
+
+  .button {
+    border: none;
+    min-width: 100px;
+    min-height: 100%;
+    box-shadow: 1px 5px 10px 0 rgba(62, 104, 239, 0.022),
+      1px 5px 10px 0 rgba(23, 28, 158, 0.09);
+    border-radius: 30px;
+    padding: 1.5em;
+    text-align: center;
+    background-color: rgb(159, 180, 253);
+    cursor: pointer;
+    color: aliceblue;
+    contain: content;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .button:focus {
+    background-color: blue;
   }
 
   @media (max-width: 600px) {
@@ -147,6 +171,5 @@
       max-width: 90%;
       flex-wrap: wrap;
     }
-
   }
 </style>

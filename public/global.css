@@ -2,7 +2,9 @@ body, html {
   height: 100%;
   width: 100%;
   margin: 0;
-  font-family: var(--button-font-family, Roboto, Helvetica, sans-serif);
+  /* font-family: var(--button-font-family, Roboto, Helvetica, sans-serif); */
+  font-family: 'Raleway', sans-serif;
+/* font-family: 'Ubuntu', sans-serif; */
   overflow: hidden;
   background-color: rgb(234, 234, 245);
 }
@@ -10,6 +12,17 @@ a {
   text-transform: uppercase;
   text-decoration: none;
   color: rgb(61, 60, 60);
+}
+
+h2, h3{
+  color: rgb(61, 60, 60);
+}
+
+p{
+  color: rgb(58, 57, 57);
+  /* font-family: 'Raleway', sans-serif; */
+font-family: 'Ubuntu', sans-serif;
+font-style: normal;
 }
 
 .material-symbols-outlined {
@@ -29,5 +42,6 @@ a {
 
 
 button{
-  cursor: pointer;
+  cursor:pointer;
 }
+

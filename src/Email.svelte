@@ -120,10 +120,6 @@
     margin: 0;
   }
 
-  .bigger {
-    font-size: 1.5em;
-  }
-
   .emailInput {
     width: 70%;
     max-width: 600px;

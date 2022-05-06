@@ -60,11 +60,6 @@
     text-align: left;
     max-width: 150px;
   }
-
-  h1{
-    
-  }
-
   nav {
     margin-top: 1vh;
     background-color: rgb(234, 234, 245);

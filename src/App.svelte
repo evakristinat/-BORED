@@ -6,7 +6,7 @@
   import Header from './Header.svelte'
   import Email from './Email.svelte'
   import Form from './Form.svelte'
-  import customActivities from './activities'
+  // import customActivities from './activities'
   import Footer from './Footer.svelte'
   import { onMount, setContext } from 'svelte'
   import { Icon } from 'svelte-mui'
@@ -75,34 +75,35 @@
   }
 
   /*tämä funktio hakee ja käsittelee lupaukset aktiviteeteista. 
-    käsittelyn jälkeen data lisätään storeen*/
-  const getMany = async (type) => {
-    let toDos = []
-    /*haetaan 8 (kaksi ylimääräistä) promisea tupla-arvojen varalta.
-      syötetään uusia lupauksia taulukkoon */
-    while (toDos.length < 8) {
-      const option = getToDo(type)
-      toDos = [...toDos, option]
-    }
+    käsittelyn jälkeen data lisätään storeen.
+    Ei käytössä tässä versiossa*/
+  // const getMany = async (type) => {
+  //   let toDos = []
+  //   /*haetaan 8 (kaksi ylimääräistä) promisea tupla-arvojen varalta.
+  //     syötetään uusia lupauksia taulukkoon */
+  //   while (toDos.length < 8) {
+  //     const option = getToDo(type)
+  //     toDos = [...toDos, option]
+  //   }
 
     /*luvataan kaikki taulukon lupaukset. data on vastaus, joka saadaan.
     varmistetaan, että kaikki tulokset olivat uniikkeja ja poistetan ylimääräiset jos niitä on.*/
-    Promise.all(toDos)
-      .then((data) => {
-        let unique = [...new Set(data.map((activity) => activity.activity))]
-        while (unique.length > 6) {
-          unique.pop()
-        }
-        return unique
-      })
-      .then((data) => {
-        customActivities.add(data)
-        return data
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
-  }
+  //   Promise.all(toDos)
+  //     .then((data) => {
+  //       let unique = [...new Set(data.map((activity) => activity.activity))]
+  //       while (unique.length > 6) {
+  //         unique.pop()
+  //       }
+  //       return unique
+  //     })
+  //     .then((data) => {
+  //       customActivities.add(data)
+  //       return data
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message)
+  //     })
+  // }
 
   /*funktiota kutsutaan aina kun tyyppi muuttuu ja alustusvaiheessa.
   Tämä hidastaa hieman alustamista, mutta se on mielestäni tässä tapauksessa hyväksyttävää. 
