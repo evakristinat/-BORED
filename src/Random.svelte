@@ -2,7 +2,7 @@
   import PageHeader from './PageHeader.svelte'
   import { Button } from 'svelte-mui'
   import { createEventDispatcher } from 'svelte'
-  import { slide } from 'svelte/transition'
+  import { fly } from 'svelte/transition'
   import { Firework } from 'svelte-loading-spinners'
 
   const dispatch = createEventDispatcher()
@@ -16,7 +16,7 @@
   $: selected = selectedToDo
 </script>
 
-<div class="container" transition:slide={{ duration: 900 }}>
+<div class="container" in:fly={{ duration: 500, x:100}}>
   <section>
     <slot name="header">
       <PageHeader pageName={header}>

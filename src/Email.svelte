@@ -1,54 +1,52 @@
 <script>
-  import { Textfield, Checkbox } from 'svelte-mui';
-  import { Button } from 'svelte-mui';
-  import { fly, fade, slide } from 'svelte/transition';
-  import { getContext, onDestroy } from 'svelte';
-  import timer from './timer';
+  import { Textfield, Checkbox } from 'svelte-mui'
+  import { Button } from 'svelte-mui'
+  import { fly, fade } from 'svelte/transition'
+  import { getContext, onDestroy } from 'svelte'
+  import timer from './timer'
 
   //selectedTodo saadaan app-komponentilta, joka saa sen random-komponentilta.
-  export let selectedToDo = '';
-  let email = '';
-  let show = false;
-  let state;
+  //ei käytössä tässä versiossa
+  // export let selectedToDo = '';
+  let email = ''
+  let show = false
+  let state
 
   //backHome navigoi takaisin etusivulle. Saa kontekstinsa app-komponentilta.
-  const backHome = getContext('backHome');
-  let checked = false;
+  const backHome = getContext('backHome')
+  let checked = false
 
   /*reaktiivisia deklaraatioita; päivittyvät automaattisesti, kun niiden arvo muuttuu.
     tämä on tarpeen, jotta validointia suoritetaan jatkuvasti, niin kauan kuin syötettä
     käsitellään*/
-  $: valid = email.length > 5 && dotCorrect && symbolCorrect;
+  $: valid = email.length > 5 && dotCorrect && symbolCorrect
   $: dotCorrect =
-    email.charAt(email.length - 4) === '.' || email.charAt(-5) === '.';
-  $: symbolCorrect = email.search('@') !== -1;
+    email.charAt(email.length - 4) === '.' || email.charAt(-5) === '.'
+  $: symbolCorrect = email.search('@') !== -1
 
   //kun timer päätyy nollaan kutsutaan backhome()
   $: if ($timer === 0) {
-    backHome();
+    backHome()
   }
 
   /*näyttää viestin ja asettaa timerille uuden arvon.
     timer alkaa laskea nykyisestä arvostaan annettuun arvoon*/
   const done = () => {
-    show = true;
-    timer.set(0);
-  };
+    show = true
+    timer.set(0)
+  }
 
   //timer palautetaan alkuarvoonsa kun komponentti poistuu
   onDestroy(() => {
-    timer.set(10);
-  });
+    timer.set(10)
+  })
 </script>
 
 <div class="container">
-  <section transition:slide>
-    <h2>
-      <span class="bigger">Great!</span> Now go {selectedToDo.toLowerCase()} and
-      come back for more suggestions if you're still bored
-    </h2>
-    <h3>Get daily suggestions!</h3>
-    <p>Receive daily suggestions on what to do and never be bored again.</p>
+  <section>
+    <h2>Thank you for leaving us a suggestion!</h2>
+    <h3>Like what we do? Join our mailing list!</h3>
+    <p>Receive new suggestions on what to do and never be bored again.</p>
 
     <!-- tämä osio näytetään jos checked on false-->
     {#if !checked}
@@ -75,8 +73,12 @@
         />
         <span class="submit-button">
           <!--nappi ei ole käytössä, jos validointi ei onnistu-->
-          <Button on:click={done} disabled={!valid} raised={valid} dense
-            >submit</Button
+          <Button
+            on:click={done}
+            disabled={!valid}
+            raised={valid}
+            dense
+            color="primary">submit</Button
           >
         </span>
       </div>

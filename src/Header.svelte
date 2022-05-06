@@ -14,6 +14,7 @@
     class3 = clicked == 3 ? 'selected' : 'li';
     class4 = clicked == 4 ? 'selected' : 'li';
   };
+
 </script>
 
 <div class="container">
@@ -57,8 +58,11 @@
     align-self: center;
     padding: 0;
     text-align: left;
-    min-width: 100px;
     max-width: 150px;
+  }
+
+  h1{
+    
   }
 
   nav {
@@ -73,7 +77,7 @@
   .li,
   li {
     width: 100%;
-    font-size: 0.9em;
+    font-size: 1em;
     font-weight: 600;
     display: inline-block;
     text-align: center;
@@ -93,7 +97,8 @@
   @media (max-width: 600px) {
     header {
       font-size: 0.6em;
-      width: 25%;
+    
+      max-width: 10%;
     }
     nav {
       margin-bottom: 0.6em;
@@ -109,11 +114,13 @@
   @media (max-width: 400px) {
     header {
       font-size: 0.6em;
-      width: 25%;
+      width: 10%;
+      max-width: 10px;
     }
     li {
       font-size: 0.8em;
       display: inline;
     }
   }
+
 </style>

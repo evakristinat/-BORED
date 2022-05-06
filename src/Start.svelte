@@ -1,23 +1,23 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import { slide } from 'svelte/transition';
-  import { Button } from 'svelte-mui';
+  import { createEventDispatcher } from 'svelte'
+  import { fade } from 'svelte/transition'
+  import { Button } from 'svelte-mui'
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 </script>
 
-<div class="container" transition:slide={{ duration: 500 }}>
+<div class="container" in:fade={{ duration: 500 }}>
   <div class="welcome">
     <h1>Welcome</h1>
     <h2>
-      During the pandemic figuring out what to do isn't always easy but by
-      answering a few questions we can find you just the right thing
+      Are you always bored? We have the answer! Whenever you’re feeling bored
+      just click the random button or give us an idea for what you’re looking
+      for and we’ll give you some ideas.
     </h2>
 
     <div class="cta">
       <Button on:click={() => dispatch('options')} raised color="blue"
-        >Get something to do!</Button
-      >
+        >Get something to do!</Button>
     </div>
   </div>
 
@@ -33,38 +33,29 @@
         class="shape-fill"
       />
     </svg>
-    </div>
+  </div>
 
   <div class="content">
+    <h3>Features</h3>
+    <p>If you're up for anything try random or get ideas based on your preferences!</p>
 
-      <h3>Features</h3>
-      <p>If you're up for anything try random or browse!</p>
-
-      <div class="flexbox">
-        <div id="browse" on:click={() => dispatch('browse')}>
-          <span class="material-symbols-outlined">
-            clarify
-            </span>
-          <h2 id="browseHeader">BROWSE</h2>
-          <p>
-            Browse suggestions of different categories and decide for yourself
-          </p>
-        </div>
-
-        <div id="random" on:click={() => dispatch('random')}>
-          <span class="material-symbols-outlined">
-            quiz
-            </span>
-          <h2 id="randomHeader">RANDOM</h2>
-          <p>
-            Get random suggestions on what to do until you find what you want
-          </p>
-        </div>
+    <div class="flexbox">
+      <div id="optimized" on:click={() => dispatch('options')}>
+        <span class="material-symbols-outlined"> clarify </span>
+        <h2 id="optimizedHeader">OPTIMIZED</h2>
+        <p>
+          Get ideas based on your preferences and the amount of people you're with
+        </p>
       </div>
-   
+
+      <div id="random" on:click={() => dispatch('random')}>
+        <span class="material-symbols-outlined"> quiz </span>
+        <h2 id="randomHeader">RANDOM</h2>
+        <p>Get random suggestions on what to do until you find what you want</p>
+      </div>
+    </div>
   </div>
 </div>
-
 
 <style>
   .container {
@@ -72,6 +63,7 @@
     height: 100%;
     overflow: hidden;
     contain: content;
+    background-color: white;
   }
 
   .custom-shape-divider-top-1639643395 {
@@ -111,9 +103,10 @@
   }
 
   .welcome {
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255); */
+    color: blue;
     margin-top: 0px;
-    height: 35vh;
+    height: 38%;
     padding: 70px 0px 0px;
     background-color: rgb(234, 234, 245);
   }
@@ -131,10 +124,10 @@
     max-width: 800px;
     margin: auto;
     text-align: center;
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255); */
+    color: blue;
   }
   h3 {
-  
     padding-top: 4vh;
     padding-bottom: 1vh;
     margin: auto;
@@ -151,14 +144,15 @@
     text-align: left;
   }
 
-  #browse > p {
+  #optimized > p {
     background-color: rgba(231, 230, 230, 0.349);
   }
   #random > p {
     background-color: rgba(170, 166, 175, 0.363);
   }
 
-  #browse, #random {
+  #optimized,
+  #random {
     border-radius: 30px;
     contain: content;
     height: fit-content;
@@ -166,7 +160,7 @@
     outline: none;
   }
 
-  #browse > h2,
+  #optimized > h2,
   #random > h2 {
     font-size: 1.1em;
     font-weight: 500;
@@ -179,8 +173,7 @@
     color: blue;
   }
 
-
-  #browse > p,
+  #optimized > p,
   #random > p {
     font-size: 1em;
     width: auto;
@@ -211,6 +204,7 @@
     width: 100%;
     justify-content: space-around;
     gap: 2vw;
+    contain: content;
   }
 
   .flexbox > div {
@@ -223,13 +217,22 @@
     box-shadow: -2px 5px 15px -1px rgba(83, 83, 83, 0.32);
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
+    h3 {
+      padding-top: 2vh;
+    }
     .container {
       height: 95%;
       margin: auto;
     }
 
+    .content {
+      min-height: fit-content;
+    }
+
     .welcome {
+      padding-top: 0;
+      height: 40%;
       padding-bottom: 2vh;
       margin: auto;
     }
@@ -249,15 +252,43 @@
 
     .flexbox {
       width: 100%;
-      height: 30%;
+      height: 50%;
       margin-top: 4vh;
       padding: 0;
       margin-left: 0;
       margin-right: 0;
     }
-    #browse > p,
+    #optimized > p,
     #random > p {
       font-size: 0.9em;
+    }
+  }
+
+  @media (max-width: 400px) {
+    h3 {
+      padding-top: 2vh;
+    }
+
+    .welcome {
+      min-height: 45vh;
+      display: block;
+    }
+    .container {
+      overflow: scroll;
+    }
+    .content {
+      min-height: 80vh;
+    }
+
+    .flexbox {
+      display: block;
+      flex-direction: column;
+      height: 70vh;
+    }
+    #random,
+    #optimized {
+      margin-top: 5vh;
+      display: block;
     }
   }
 </style>

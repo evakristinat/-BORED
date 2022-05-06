@@ -1,43 +1,43 @@
 <script>
-  import Random from './Random.svelte';
-  import Options from './Options.svelte';
-  import Browse from './Browse.svelte';
-  import Start from './Start.svelte';
-  import Header from './Header.svelte';
-  import Email from './Email.svelte';
-  import Form from './Form.svelte';
-  import customActivities from './activities';
-  import Footer from './Footer.svelte';
-  import { onMount, setContext } from 'svelte';
-  import { Icon } from 'svelte-mui';
+  import Random from './Random.svelte'
+  import Options from './Options.svelte'
+  // import Browse from './Browse.svelte'
+  import Start from './Start.svelte'
+  import Header from './Header.svelte'
+  import Email from './Email.svelte'
+  import Form from './Form.svelte'
+  import customActivities from './activities'
+  import Footer from './Footer.svelte'
+  import { onMount, setContext } from 'svelte'
+  import { Icon } from 'svelte-mui'
 
-  import { Router, links, Route, navigate } from 'svelte-routing';
+  import { Router, links, Route, navigate } from 'svelte-routing'
 
-  export let url = '';
-  const header = '!BORED';
+  export let url = ''
+  const header = window.screen.width < 300 ? '!B' : '!BORED'
 
   let promise = new Promise((res) => {
-    res(['activity']);
-  });
-  let promiseOptions;
-  let options;
+    res(['activity'])
+  })
+  let promiseOptions
+  let options
 
   //activityTypeen sijoitetaan valittu tyyppi (active,chill,social)
-  let activityType = 'chill';
+  let activityType = 'chill'
 
   /*setContext välittää activityType muuttujan päivittävän funktion
   categories-komponentille*/
-  setContext('setActivityType', (type) => (activityType = type));
+  setContext('setActivityType', (type) => (activityType = type))
 
   //selected saa arvon kun käyttäjä valitsee ehdotuksen Random-komponentissa.
-  //tieto välitetään sitten Email-komponentille näytettäväksi.
-  let selected;
+  //tieto välitetään sitten Email-komponentille näytettäväksi. Ei käytössä tässä versiossa.
+  // let selected
 
   /*randomNumber kertoo vaihtoehtoja hyödyntävälle ehdotushaulle osallistujien 
   määrän 2-4, koska käyttöliittymä ei mahdollista tarkan lukumäärän antoa*/
   const getRandomNumber = () => {
-    return Math.floor(Math.random() * 3) + 2;
-  };
+    return Math.floor(Math.random() * 3) + 2
+  }
 
   //getToDo hakee aktiviteetin API:sta
   const getToDo = async (option) => {
@@ -49,111 +49,113 @@
       //console.log("Haetaan omaa dataa")
       const response = await fetch(
         `https://bored-svelte-default-rtdb.europe-west1.firebasedatabase.app/.json`
-      );
+      )
       if (!response.ok) {
-        throw new Error('Fetch unsuccessful');
+        throw new Error('Fetch unsuccessful')
       }
-      const res = await response.json();
+      const res = await response.json()
       // Muunnetaan palautunut objekti arrayksi
-      const array = Object.values(res);
+      const array = Object.values(res)
       //console.log(array);
       // Otetaan satunnainen alkio arraysta
-      const randomElement = array[Math.floor(Math.random() * array.length)];
+      const randomElement = array[Math.floor(Math.random() * array.length)]
       //console.log(randomElement)
-      return await randomElement;
+      return await randomElement
     }
     // Jos satunnainen luku on yli kaksi,
     // haetaan activity API:sta
     const response = await fetch(
       `https://www.boredapi.com/api/activity?${option}`
-    );
+    )
     if (!response.ok) {
-      throw new Error('Fetch unsuccessful');
+      throw new Error('Fetch unsuccessful')
     }
     //console.log(response.json())
-    return await response.json();
-  };
+    return await response.json()
+  }
 
   /*tämä funktio hakee ja käsittelee lupaukset aktiviteeteista. 
     käsittelyn jälkeen data lisätään storeen*/
   const getMany = async (type) => {
-    let toDos = [];
+    let toDos = []
     /*haetaan 8 (kaksi ylimääräistä) promisea tupla-arvojen varalta.
       syötetään uusia lupauksia taulukkoon */
     while (toDos.length < 8) {
-      const option = getToDo(type);
-      toDos = [...toDos, option];
+      const option = getToDo(type)
+      toDos = [...toDos, option]
     }
 
     /*luvataan kaikki taulukon lupaukset. data on vastaus, joka saadaan.
     varmistetaan, että kaikki tulokset olivat uniikkeja ja poistetan ylimääräiset jos niitä on.*/
     Promise.all(toDos)
       .then((data) => {
-        let unique = [...new Set(data.map((activity) => activity.activity))];
+        let unique = [...new Set(data.map((activity) => activity.activity))]
         while (unique.length > 6) {
-          unique.pop();
+          unique.pop()
         }
-        return unique;
+        return unique
       })
       .then((data) => {
-        customActivities.add(data);
-        return data;
+        customActivities.add(data)
+        return data
       })
       .catch((error) => {
-        console.log(error.message);
-      });
-  };
+        console.log(error.message)
+      })
+  }
 
   /*funktiota kutsutaan aina kun tyyppi muuttuu ja alustusvaiheessa.
-  Tämä hidastaa hieman alustamista, mutta se on mielestäni tässä tapauksessa hyväksyttävää. */
-  $: getMany(activityType);
+  Tämä hidastaa hieman alustamista, mutta se on mielestäni tässä tapauksessa hyväksyttävää. 
+  Ei käytössä tässä versiossa */
+  // $: getMany(activityType)
 
   /* Funktio saa tiedon käyttäjän antamista tiedoista options-komponentissa ja kokoaa ne yhteen
   käsiteltäväksi ja kutsuu niiden avulla ehdtotuksen noutavaa funktiota ja navigoi tuloksiin. */
   const getOptions = (ce) => {
-    let randomNumber = getRandomNumber();
-    const participants = ce.detail.social ? randomNumber : 1;
-    options = `minaccessibility=0.0&maxaccessibility=${ce.detail.activity}&participants=${participants}`;
-    promiseOptions = getToDo(options);
-    console.log(options);
-    navigate('result');
-  };
+    let randomNumber = getRandomNumber()
+    const participants = ce.detail.social ? randomNumber : 1
+    options = `minaccessibility=0.0&maxaccessibility=${ce.detail.activity}&participants=${participants}`
+    promiseOptions = getToDo(options)
+    console.log(options)
+    navigate('result')
+  }
 
   const getTypes = () => {
-    promiseOptions = getToDo(activityType);
-    navigate('typeresult');
-  };
+    promiseOptions = getToDo(activityType)
+    navigate('typeresult')
+  }
 
   /*promsise alkuarvo random-ehdotukselle.*/
 
   onMount(() => {
-    promise = getToDo();
-  });
+    promise = getToDo()
+  })
 
   //päivittää ehdotuksen valinnoilla. Käytössä Options-komponentin läpikäymisen jälkeen.
   const promiseop = () => {
-    promiseOptions = getToDo(options);
-  };
+    promiseOptions = getToDo(options)
+  }
 
   const promisetype = () => {
-    promiseOptions = getToDo(activityType);
-  };
+    promiseOptions = getToDo(activityType)
+  }
 
   //päivittää random-ehdotuksen
   const newIdea = () => {
-    promise = getToDo();
-  };
+    promise = getToDo()
+  }
 
   //hakee hyväksytyn tekemisehdotuksen ja asettaa sen selected muuttujaan, joka välitetään Email-komponentille.
-  const getSelected = (ce) => {
-    selected = ce.detail.innerText;
-    navigate('email');
-  };
+  //Ei käytössä tässä versiossa
+  // const getSelected = (ce) => {
+  //   selected = ce.detail.innerText
+  //   navigate('email')
+  // }
 
   //jakaa email-komponentin kanssa kotisivulle navigoivan funktion
   setContext('backHome', () => {
-    navigate('/');
-  });
+    navigate('/')
+  })
 </script>
 
 <!-- märitetään, että kohdellaan perinteisiä linkkejä router-linkkeinä-->
@@ -166,17 +168,19 @@
         <a href="/" slot="header">{header}</a>
         <a id="1" href="/options" slot="1">Options</a>
         <a id="2" href="/random" slot="2">Random</a>
-        <a id="3" href="/browse" slot="3">Browse</a>
+        <!-- <a id="3" href="/browse" slot="3">Browse</a> -->
         <a id="4" href="/form" slot="4">Form</a>
       </Header>
 
       <!-- Seuraavaksi määritetään url-polut komponenteille
-          navigate() ohjaa parametrina annetulle polulle-->
+          navigate() ohjaa parametrina annetulle polulle
+          
+        Browse ei käytössä tässä versiossa
+          on:browse={() => navigate('browse')}-->
       <Route path="/"
         ><Start
           on:options={() => navigate('options')}
           on:random={() => navigate('random')}
-          on:browse={() => navigate('browse')}
           on:form={() => navigate('form')}
         /></Route
       >
@@ -223,14 +227,16 @@
           </div>
         </Options></Route
       >
-      <Route><Form header="form" {promise} /></Route>
+      <Route path="form">
+        <Form />
+      </Route>
       <Route path="random"
         ><Random
           header="random"
           {promise}
           on:new={newIdea}
-          on:ok={getSelected}
           on:change={() => navigate('options')}
+          on:form={() => navigate('form')}
         /></Route
       >
       <Route path="result"
@@ -239,6 +245,7 @@
           promise={promiseOptions}
           on:new={promiseop}
           on:change={() => navigate('options')}
+          on:form={() => navigate('form')}
         /></Route
       >
       <Route path="typeresult">
@@ -247,12 +254,14 @@
           promise={promiseOptions}
           on:new={promisetype}
           on:change={() => navigate('options')}
+          on:form={() => navigate('form')}
         />
       </Route>
-      <Route path="browse"
+      <!-- ei käytössä tässä versiossa -->
+      <!-- <Route path="browse"
         ><Browse on:new={() => getMany(activityType)} /></Route
-      >
-      <Route path="email"><Email selectedToDo={selected} /></Route>
+      > -->
+      <Route path="email"><Email/></Route>
     </Router>
   </div>
   <Footer />

@@ -4,6 +4,7 @@ body, html {
   margin: 0;
   font-family: var(--button-font-family, Roboto, Helvetica, sans-serif);
   overflow: hidden;
+  background-color: rgb(234, 234, 245);
 }
 a {
   text-transform: uppercase;
@@ -12,9 +13,21 @@ a {
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'GRAD' 200,
-  'opsz' 48;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 700,
+    'GRAD' 200,
+    'opsz' 48;
+    color: blue;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+button{
+  cursor: pointer;
+}

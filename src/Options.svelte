@@ -2,7 +2,7 @@
   import PageHeader from './PageHeader.svelte'
   import { Button } from 'svelte-mui'
   import { createEventDispatcher } from 'svelte'
-  import { slide } from 'svelte/transition'
+  import { fly } from 'svelte/transition'
   import Categories from './Categories.svelte'
 
   //dispatch vastaa tapahtumien viennistä komponenttien välillä.
@@ -18,7 +18,7 @@
   }
 </script>
 
-<div class="container" transition:slide={{ duration: 500 }}>
+<div class="container" in:fly={{ duration: 500, x: 100 }}>
   <PageHeader pageName="Options"
     ><p slot="info">
       Answer these questions to get customised suggestions on what to do or
@@ -28,6 +28,7 @@
 
   <div class="flex">
     <section>
+      <p class="option-p">Optimized suggestion</p>
       <!--formin luonnollinen toiminta estetään ja korvataan omalla tapahtumankäsittelijällä
     tässä tapauksessa klikkauksen mukana kulkee activity ja social muuttujien arvot-->
       <form
@@ -82,6 +83,7 @@
       </form>
     </section>
     <section class="categories">
+      <p class="option-p">Categories</p>
       <!-- <h3>Categories</h3> -->
       <div on:click={() => dispatch('sendtype')}>
         <Categories />
@@ -107,13 +109,18 @@
     overflow: hidden;
     contain: content;
   }
+
+  .option-p {
+    text-align: left;
+    padding-left: 5vh;
+  }
   form {
     width: 90%;
     max-width: 800px;
     text-align: center;
     background-color: rgb(159, 180, 253);
     border-radius: 50px;
-    padding: 2%;
+    padding: 10%;
     margin-bottom: 40px;
     box-shadow: -2px 5px 15px -7px rgba(83, 83, 83, 0.32);
     display: flex;
@@ -121,7 +128,8 @@
     align-items: center;
   }
   .submit-button {
-    background-color: blue;
+    transition: 900ms;
+    background-color: rgba(0, 0, 255);
     color: whitesmoke;
     margin: auto;
     margin-bottom: 2vh;
@@ -131,6 +139,12 @@
     text-transform: uppercase;
     font-weight: bold;
     border-radius: 10px;
+  }
+
+  .submit-button:hover {
+    transition: 500ms;
+    background-color: rgba(0, 13, 255, 0.588);
+    box-shadow: 0px 3px 10px 2px rgba(0, 13, 109, 0.195);
   }
 
   .quantity,
@@ -155,11 +169,21 @@
   }
 
   @media (max-width: 400px) {
+    .container {
+      overflow: scroll;
+    }
     form {
       width: 90%;
     }
     label {
       padding-right: 1px;
+    }
+
+    .flex {
+      flex-direction: column;
+      align-items: center;
+      contain: content;
+      height: 80vh;
     }
   }
 </style>

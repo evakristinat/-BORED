@@ -3,14 +3,14 @@
   import Categories from './Categories.svelte'
   import customActivities from './activities'
 
-  import { slide, fade } from 'svelte/transition'
+  import { fly, fade } from 'svelte/transition'
   import { Button } from 'svelte-mui'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
 </script>
 
-<div class="container" transition:slide={{ duration: 900 }}>
+<div class="container" transition:fly={{ duration: 500 }}>
   <PageHeader pageName="Browse">
     <p slot="info">Browse suggestions based on wanted category</p>
   </PageHeader>

@@ -21,7 +21,9 @@
       fullWidth
       color="rgb(250, 252, 246)"
     >
-      CHILL
+    <span class="button-content">
+      <span class="material-symbols-outlined"> self_improvement </span>
+      CHILL </span>
     </button>
 
     <button
@@ -33,8 +35,9 @@
       raised
       fullWidth
       color="rgb(250, 252, 246)"
-    >
-      ACTIVE
+      ><span class="button-content"> 
+      <span class="material-symbols-outlined"> sports_gymnastics </span>
+      ACTIVE </span>
     </button>
 
     <button
@@ -44,7 +47,10 @@
         setActivityType(social)
       }}
     >
-      SOCIAL
+      <span class="button-content">
+        <span class="material-symbols-outlined"> communication </span>
+        SOCIAL</span
+      >
     </button>
   </div>
 </div>
@@ -60,16 +66,17 @@
   .buttongroup {
     display: flex;
     flex-direction: column;
-    justify-content:stretch;
+    justify-content: stretch;
     padding-top: 10px;
     height: 100%;
     width: 100%;
     min-width: 200px;
+    contain: content;
   }
 
   .icon-button {
     border: none;
-    width: 50%;
+    width: 70%;
     min-width: 100px;
     box-shadow: 1px 5px 10px 0 rgba(20, 50, 150, 0.141),
       1px 5px 10px 0 rgba(23, 28, 158, 0.19);
@@ -83,6 +90,12 @@
 
   .icon-button:focus {
     background-color: blue;
+  }
+
+  .button-content {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
   }
 
   @media (max-width: 600px) {
