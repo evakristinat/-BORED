@@ -1,8 +1,8 @@
+##!BORED
 
-## CORONA-BORED
- ##### Harjoitustyö Frontend-perusteet -opintojaksolle.
+[Test it out here](https://bored-omega.vercel.app/form)
 
-Corona-bored for the bored. 
+
 
 
 #### Lähteet:
