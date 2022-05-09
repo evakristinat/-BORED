@@ -1,4 +1,4 @@
-##!BORED
+## !BORED
 
 Are you always bored? We have the answer! The !BORED app. Whenever you’re
 feeling bored just click the random button or give us an idea for what you’re looking for
